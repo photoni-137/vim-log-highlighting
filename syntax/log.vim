@@ -48,7 +48,7 @@ syn keyword logDate Mon Tue Wed Thu Fri Sat Sun Jan Feb Mar Apr May Jun Jul Aug 
 syn match logDateDay '\s\{1,2}\d\{1,2}' contained
 
 " Matches 12:09:38 or 00:03:38.129Z or 01:32:12.102938 +0700
-syn match logTime '\d\{2}:\d\{2}:\d\{2}\(\.\d\{2,6}\)\?\(\s\?[-+]\d\{2,4}\|Z\)\?\>' nextgroup=logTimeZone,logSysColumns skipwhite
+syn match logTime '\d\{2}:\d\{2}:\d\{2}\(\.\d\{2,6}\)\?\(\s\?[-+]\d\{2,4}\(:\d\{2}\)\?\|Z\)\?\>' nextgroup=logTimeZone,logSysColumns skipwhite
 
 " Follows logTime, matches UTC or PDT 2019 or 2019 EDT
 syn match logTimeZone '[A-Z]\{2,5}\>\( \d\{4}\)\?' contained
@@ -71,8 +71,8 @@ syn match logFilePath   '[^a-zA-Z0-9"']\@<=\/\w[^\n|,; ()'"\]{}]\+'
 " Syslog Columns
 "---------------------------------------------------------------------------
 " Syslog hostname, program and process number columns
-syn match logSysColumns '\w\(\w\|\.\|-\)\+ \(\w\|\.\|-\)\+\(\[\d\+\]\)\?:' contains=logOperator,logSysProcess contained
-syn match logSysProcess '\(\w\|\.\|-\)\+\(\[\d\+\]\)\?:' contains=logOperator,logNumber,logBrackets contained
+syn match logSysColumns '\w\(\w\|\.\|-\)\+ \(\w\|\.\|-\)\+\(\[\d\+\]\)\?:\?' contains=logOperator,logSysProcess contained
+syn match logSysProcess '\(\w\|\.\|-\|_\)\+\(\[\d\+\]\)\?:\?' contains=logOperator,logNumber,logBrackets contained
 
 
 " XML Tags
